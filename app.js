@@ -98,19 +98,41 @@
  * Виклики getReceipt для обох записів уже написані нижче — результат зʼявиться в консолі.
  */
 
-const firstVisit = { service: "Cleaning", price: 500, paid: true };
-const secondVisit = {
-  service: "Whitening",
-  price: 800,
-  sessions: 3,
-  paid: false,
-};
+// const firstVisit = { service: "Cleaning", price: 500, paid: true };
+// const secondVisit = {
+//   service: "Whitening",
+//   price: 800,
+//   sessions: 3,
+//   paid: false,
+// };
 
-const getReceipt = ({ service, price, sessions = 1, paid }) => {
-  const totalPrice = price * sessions;
-  const status = paid ? "paid" : "due";
-  return `${service}: ${totalPrice} credits (${status})`;
-};
+// const getReceipt = ({ service, price, sessions = 1, paid }) => {
+//   const totalPrice = price * sessions;
+//   const status = paid ? "paid" : "due";
+//   return `${service}: ${totalPrice} credits (${status})`;
+// };
 
-console.log(getReceipt(firstVisit));
-console.log(getReceipt(secondVisit));
+// console.log(getReceipt(firstVisit));
+// console.log(getReceipt(secondVisit));
+
+"use strict";
+
+/*
+ * У SmileCare є список записів appointments. Треба зібрати ті, що ще не оплачені.
+ * 1. Методом filter відбери записи, у яких paid дорівнює false. У колбеку filter
+ *    деструктуризуй параметр і бери властивість paid.
+ * 2. Методом map перетвори відібрані записи на рядки. У колбеку map деструктуризуй
+ *    параметр і бери service та price. Формат рядка: "SERVICE: PRICE credits".
+ * 3. Результат (масив рядків) виведи в консоль.
+ */
+
+const appointments = [
+  { service: "Cleaning", price: 500, paid: true },
+  { service: "Whitening", price: 800, paid: false },
+  { service: "Braces check", price: 300, paid: false },
+];
+
+const messages = appointments
+  .filter(({ paid }) => !paid)
+  .map(({ service, price }) => `${service}: ${price} credits`);
+console.log(messages);
