@@ -126,13 +126,34 @@
  * 3. Результат (масив рядків) виведи в консоль.
  */
 
-const appointments = [
-  { service: "Cleaning", price: 500, paid: true },
-  { service: "Whitening", price: 800, paid: false },
-  { service: "Braces check", price: 300, paid: false },
-];
+// const appointments = [
+//   { service: "Cleaning", price: 500, paid: true },
+//   { service: "Whitening", price: 800, paid: false },
+//   { service: "Braces check", price: 300, paid: false },
+// ];
 
-const messages = appointments
-  .filter(({ paid }) => !paid)
-  .map(({ service, price }) => `${service}: ${price} credits`);
-console.log(messages);
+// const messages = appointments
+//   .filter(({ paid }) => !paid)
+//   .map(({ service, price }) => `${service}: ${price} credits`);
+// console.log(messages);
+
+"use strict";
+
+/*
+ * Поле для нікнейму має памʼятати введене значення після перезавантаження сторінки.
+ * 1. Знайди інпут .nickname-input.
+ * 2. Під час завантаження сторінки постав у поле збережене значення з localStorage
+ *    за ключем "nickname"; якщо його немає — залиши поле порожнім.
+ * 3. На подію "input" зберігай поточне значення поля в localStorage під тим самим ключем.
+ */
+
+const input = document.querySelector(".nickname-input");
+
+const savedValue = localStorage.getItem("nickname");
+if (savedValue) {
+  input.value = savedValue;
+}
+
+input.addEventListener("input", (event) => {
+  localStorage.setItem("nickname", event.target.value);
+});
